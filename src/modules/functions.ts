@@ -73,6 +73,9 @@ export const cocktailSort = (array: Array<number>): void => {
 
   let left: number = 1;
   let right: number = N - 1;
+
+  let comps: number = 0;
+  let trans: number = 0;
   
   let isSwaped: boolean;
 
@@ -81,7 +84,9 @@ export const cocktailSort = (array: Array<number>): void => {
 
     // сначала проход слева направо
     for (let i: number = left; i <= right; ++i) {
+      ++comps;
       if (array[i - 1] > array[i]) {
+        ++trans;
         swap(array, i - 1, i);
         isSwaped = true;
       }
@@ -90,7 +95,9 @@ export const cocktailSort = (array: Array<number>): void => {
 
     // потом проход справа налево
     for (let i: number = right; i >= left; --i) {
+      ++comps;
       if (array[i - 1] > array[i]) {
+        ++trans;
         swap(array, i - 1, i);
         isSwaped = true;
       }
@@ -98,4 +105,7 @@ export const cocktailSort = (array: Array<number>): void => {
     ++left;           // увеличение левой границы массива
   }
   while (isSwaped);
+
+  console.log(`Сравнений: ${comps}`);
+  console.log(`Перемещений: ${trans}`);
 }
