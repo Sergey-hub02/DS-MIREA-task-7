@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import * as vars from "./constants";
-import { generateArray } from "./modules/functions";
+import { generateArray, bubbleSort } from "./modules/functions";
 
 
 /* Подобие стандартного потока ввода */
@@ -15,8 +15,15 @@ const main = async (): Promise<void> => {
   const arrayLength: number = +_STDIN_.split("\n")[0];
   const [min, max] = _STDIN_.split("\n")[1].split(" ").map(item => + item);
 
-  const array: Array<number> = generateArray(arrayLength, min, max);
-  console.log(array);
+  console.log(`Количество элементов: ${arrayLength}`);
+  console.log(`Минимальное значение: ${min}`);
+  console.log(`Максимальное значение: ${max}`);
+
+  console.log();
+  console.log();
+
+  let array: Array<number> = generateArray(arrayLength, min, max);
+  bubbleSort(array);
 }
 
 
