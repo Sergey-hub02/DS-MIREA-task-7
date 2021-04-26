@@ -62,3 +62,50 @@ export const bubbleSort = (array: Array<number>): void => {
   console.log(`Сравнений: ${comps}`);
   console.log(`Перемещений: ${trans}`);
 }
+
+
+/**
+ * Выполняет шейкерную сортировку для заданного массива array
+ * @param array         сортируемый массив
+ */
+export const cocktailSort = (array: Array<number>): void => {
+  const N: number = array.length;
+
+  let left: number = 1;
+  let right: number = N - 1;
+
+  let comps: number = 0;
+  let trans: number = 0;
+  
+  let isSwaped: boolean;
+
+  do {
+    isSwaped = false;
+
+    // сначала проход слева направо
+    for (let i: number = left; i <= right; ++i) {
+      ++comps;
+      if (array[i - 1] > array[i]) {
+        ++trans;
+        swap(array, i - 1, i);
+        isSwaped = true;
+      }
+    }
+    --right;          // уменьшение правой границы массива
+
+    // потом проход справа налево
+    for (let i: number = right; i >= left; --i) {
+      ++comps;
+      if (array[i - 1] > array[i]) {
+        ++trans;
+        swap(array, i - 1, i);
+        isSwaped = true;
+      }
+    }
+    ++left;           // увеличение левой границы массива
+  }
+  while (isSwaped);
+
+  console.log(`Сравнений: ${comps}`);
+  console.log(`Перемещений: ${trans}`);
+}

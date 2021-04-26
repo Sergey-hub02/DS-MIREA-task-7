@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import * as vars from "./constants";
-import { generateArray, bubbleSort } from "./modules/functions";
+import { generateArray, cocktailSort } from "./modules/functions";
 
 
 /* Подобие стандартного потока ввода */
@@ -23,7 +23,7 @@ const main = async (): Promise<void> => {
   console.log();
 
   let array: Array<number> = generateArray(arrayLength, min, max);
-  bubbleSort(array);
+  cocktailSort(array);
 }
 
 
