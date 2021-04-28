@@ -21,6 +21,57 @@ const swap = (array: Array<number>, firstIndex: number, secondIndex: number): vo
 
 
 /**
+ * Данная функция является заменой оператора целочисленного деления
+ * @param value1        делимое
+ * @param value2        делитель
+ * @returns             результат целочисленного деления
+ */
+export const div = (value1: number, value2: number): number => {
+  return (value1 - value1 % value2) / value2;
+}
+
+
+/**
+ * Выполняет слияние массива
+ * @param array         массив, в котором будет выполняться слияние
+ * @param low           левая граница
+ * @param middle        средняя граница
+ * @param high          правая граница
+ */
+const merge = (array: Array<number>, low: number, middle: number, high: number): void => {
+  // Слияние array[low...middle] с array[middle+1...high]
+  let i: number = low;
+  let j: number = middle + 1;
+
+  let extraArray: Array<number> = new Array();
+
+  for (let k: number = low; k <= high; ++k) {
+    extraArray[k] = array[k];
+  }
+
+  for (let k: number = low; k <= high; ++k) {
+    if (i > middle) {       // элементы из левой половины закончились
+      array[k] = extraArray[j++];
+      continue;
+    }
+
+    if (j > high) {       // элементы из правой половины закончились
+      array[k] = extraArray[i++];
+      continue;
+    }
+
+    if (extraArray[j] < extraArray[i]) {    // текущий ключ из правой половины меньше текущего ключа из левой
+      array[k] = extraArray[j++];
+      continue;
+    }
+
+    // текущий ключ из левой половины меньше текущего ключа из правой
+    array[k] = extraArray[i++];
+  }
+}
+
+
+/**
  * Возвращает массив длины length, заполненный случайными целыми числами в интервале [min, max)
  * @param length        количество элементов массива
  * @param min           минимальное значение элемента массива
@@ -108,4 +159,18 @@ export const cocktailSort = (array: Array<number>): void => {
 
   console.log(`Сравнений: ${comps}`);
   console.log(`Перемещений: ${trans}`);
+}
+
+
+export const mergeSort = (array: Array<number>, low: number, high: number): void => {
+  if (high <= low) {
+    return;
+  }
+
+  const middle: number = low + div(high - low, 2);
+
+  mergeSort(array, low, middle);
+  mergeSort(array, middle + 1, high);
+
+  merge(array, low, middle, high);
 }
