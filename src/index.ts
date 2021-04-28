@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import * as vars from "./constants";
-import { generateArray, mergeSort } from "./modules/functions";
+import { generateArray, mergeSort, mergeComps, mergeTrans } from "./modules/functions";
 
 
 /* Подобие стандартного потока ввода */
@@ -24,6 +24,9 @@ const main = async (): Promise<void> => {
 
   let array: Array<number> = generateArray(arrayLength, min, max);
   mergeSort(array, 0, array.length - 1);
+
+  console.log(`Сравнений: ${mergeComps}`);
+  console.log(`Перемещений: ${mergeTrans}`);
 }
 
 

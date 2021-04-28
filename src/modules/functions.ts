@@ -1,3 +1,6 @@
+export let mergeComps: number = 0;
+export let mergeTrans: number = 0;
+
 /**
  * Возвращает случайное целое число в интервале [min, max)
  * @param min         минимальное из возможных чисел
@@ -50,23 +53,28 @@ const merge = (array: Array<number>, low: number, middle: number, high: number):
   }
 
   for (let k: number = low; k <= high; ++k) {
+    ++mergeComps;
     if (i > middle) {       // элементы из левой половины закончились
+      ++mergeTrans;
       array[k] = extraArray[j++];
       continue;
     }
 
     if (j > high) {       // элементы из правой половины закончились
+      ++mergeTrans;
       array[k] = extraArray[i++];
       continue;
     }
 
     if (extraArray[j] < extraArray[i]) {    // текущий ключ из правой половины меньше текущего ключа из левой
+      ++mergeTrans;
       array[k] = extraArray[j++];
       continue;
     }
 
     // текущий ключ из левой половины меньше текущего ключа из правой
     array[k] = extraArray[i++];
+    ++mergeTrans;
   }
 }
 
