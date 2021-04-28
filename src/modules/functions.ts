@@ -29,7 +29,7 @@ const swap = (array: Array<number>, firstIndex: number, secondIndex: number): vo
  * @param value2        делитель
  * @returns             результат целочисленного деления
  */
-export const div = (value1: number, value2: number): number => {
+const div = (value1: number, value2: number): number => {
   return (value1 - value1 % value2) / value2;
 }
 
@@ -76,6 +76,31 @@ const merge = (array: Array<number>, low: number, middle: number, high: number):
     array[k] = extraArray[i++];
     ++mergeTrans;
   }
+}
+
+
+/**
+ * Создаёт массив длины length отсортированный в порядке возрастания (убывания)
+ * @param length                кол-во элементов в массиве
+ * @param increasing            если равен true, то функция создаёт возрастающий массив
+ */
+export const generateSortedArray = (length: number, increasing?: boolean): Array<number> => {
+  let array: Array<number> = new Array(length);
+
+  if (increasing === true || increasing === undefined) {    // параметр передан явно как true или не передан вовсе
+    // сгенерировать возрастающую последовательность
+    for (let i: number = 0; i < length; ++i) {
+      array[i] = i;
+    }
+  }
+  else {  // по идее параметр передан явно как false
+    // сгенерировать убывающую последовательность
+    for (let i: number = length - 1; i >= 0; --i) {
+      array[Math.abs(i - length + 1)] = i;
+    }
+  }
+
+  return array;
 }
 
 

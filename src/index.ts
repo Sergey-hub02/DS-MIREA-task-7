@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import * as vars from "./constants";
-import { generateArray, mergeSort, mergeComps, mergeTrans } from "./modules/functions";
+import { generateSortedArray } from "./modules/functions";
 
 
 /* Подобие стандартного потока ввода */
@@ -12,21 +12,15 @@ const _STDIN_: string = fs.readFileSync(vars._PATH_TO_INPUT_FILE_ + vars._INPUT_
  * Основная функция
  */
 const main = async (): Promise<void> => {
-  const arrayLength: number = +_STDIN_.split("\n")[0];
-  const [min, max] = _STDIN_.split("\n")[1].split(" ").map(item => +item);
+  const arrayLength: number = +_STDIN_;
 
   console.log(`Количество элементов: ${arrayLength}`);
-  console.log(`Минимальное значение: ${min}`);
-  console.log(`Максимальное значение: ${max}`);
 
   console.log();
   console.log();
 
-  let array: Array<number> = generateArray(arrayLength, min, max);
-  mergeSort(array, 0, array.length - 1);
-
-  console.log(`Сравнений: ${mergeComps}`);
-  console.log(`Перемещений: ${mergeTrans}`);
+  let array: Array<number> = generateSortedArray(arrayLength);
+  console.log(array);
 }
 
 
