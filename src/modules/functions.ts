@@ -170,6 +170,12 @@ export const cocktailSort = (array: Array<number>): void => {
 }
 
 
+/**
+ * Выполняет сортировку слиянием для заданного массива array
+ * @param array         сортируемый массив
+ * @param low           левая граница массива
+ * @param high          правая граница массива
+ */
 export const mergeSort = (array: Array<number>, low: number, high: number): void => {
   if (high <= low) {
     return;
