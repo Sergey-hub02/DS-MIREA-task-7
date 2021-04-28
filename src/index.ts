@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import * as vars from "./constants";
-import { generateArray, cocktailSort } from "./modules/functions";
+import { generateArray, mergeSort } from "./modules/functions";
 
 
 /* Подобие стандартного потока ввода */
@@ -13,7 +13,7 @@ const _STDIN_: string = fs.readFileSync(vars._PATH_TO_INPUT_FILE_ + vars._INPUT_
  */
 const main = async (): Promise<void> => {
   const arrayLength: number = +_STDIN_.split("\n")[0];
-  const [min, max] = _STDIN_.split("\n")[1].split(" ").map(item => + item);
+  const [min, max] = _STDIN_.split("\n")[1].split(" ").map(item => +item);
 
   console.log(`Количество элементов: ${arrayLength}`);
   console.log(`Минимальное значение: ${min}`);
@@ -23,7 +23,7 @@ const main = async (): Promise<void> => {
   console.log();
 
   let array: Array<number> = generateArray(arrayLength, min, max);
-  cocktailSort(array);
+  mergeSort(array, 0, array.length - 1);
 }
 
 
